@@ -1,0 +1,75 @@
+<!-- ✅ index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EVA - ERP Virtual Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>EVA - Your ERP AI Assistant</h1>
+  </header>
+
+  <main>
+    <div id="chat-window">
+      <div id="messages"></div>
+
+      <form id="chat-form">
+        <input type="text" id="user-input" placeholder="Ask EVA anything about ERP..." required />
+        <button type="submit">Send</button>
+        <button type="button" id="mic-btn" title="Speak">🎙️</button>
+      </form>
+
+      <!-- 🌍 Language Selector Dropdown -->
+      <select id="language-select" title="Choose a language for voice input">
+        <option value="en-US">🇺🇸 English</option>
+        <option value="hi-IN">🇮🇳 Hindi</option>
+        <option value="bn-IN">🇧🇩 Bengali</option>
+        <option value="es-ES">🇪🇸 Spanish</option>
+        <option value="pt-PT">🇵🇹 Portuguese</option>
+        <option value="ar-SA">🇸🇦 Arabic</option>
+        <option value="fr-FR">🇫🇷 French</option>
+        <option value="de-DE">🇩🇪 German</option>
+        <option value="ja-JP">🇯🇵 Japanese</option>
+        <option value="ko-KR">🇰🇷 Korean</option>
+        <option value="tr-TR">🇹🇷 Turkish</option>
+        <option value="ru-RU">🇷🇺 Russian</option>
+        <option value="it-IT">🇮🇹 Italian</option>
+        <option value="zh-CN">🇨🇳 Chinese (Simplified)</option>
+      </select>
+    </div>
+
+    <!-- ✅ EVA Agent Trigger Form -->
+    <div class="card p-4 mb-4" style="margin-top: 2rem; border: 1px solid #ccc; padding: 1rem;">
+      <h3 style="margin-bottom: 1rem;">Trigger EVA Agent (Webhook)</h3>
+      <form id="agentForm">
+        <input type="text" id="vendor" placeholder="Vendor (e.g., Vendor A)" required />
+        <input type="text" id="product" placeholder="Product (e.g., Keyboard)" required />
+        <input type="number" id="amount" placeholder="Amount (e.g., 7000)" required />
+        <button type="submit">Run Agent</button>
+      </form>
+      <div id="agentResult" style="margin-top: 1rem; font-weight: bold; color: green;"></div>
+    </div>
+
+    <!-- ✅ Check Inventory with AI Suggestion -->
+    <div class="card p-4 mb-4" style="margin-top: 2rem; border: 1px solid #ccc; padding: 1rem;">
+      <h3 style="margin-bottom: 1rem;">📦 Check Inventory</h3>
+      <label for="productInput">Search Product:</label>
+      <div class="position-relative">
+        <input type="text" id="productInput" placeholder="Start typing (e.g., Mo...)" autocomplete="off" />
+        <ul id="suggestionsList" class="list-group position-absolute w-100" style="z-index: 1000;"></ul>
+      </div>
+      <button id="checkInventoryBtn" style="margin-top: 10px;">Check Inventory</button>
+      <p id="inventoryResult" style="margin-top: 1rem; font-weight: bold;"></p>
+    </div>
+  </main>
+
+  <footer>
+    <p>Made with 💡 for Asseco</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
