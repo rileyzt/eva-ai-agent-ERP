@@ -1,3 +1,9 @@
+const BASE_URL = location.hostname === "localhost"
+  ? "http://localhost:3000"
+  : "https://eva-ai-agent-erp.onrender.com";
+
+console.log("[🌐] Using backend:", BASE_URL);
+
 const form = document.getElementById("chat-form");
 const input = document.getElementById("user-input");
 const messages = document.getElementById("messages");
@@ -26,7 +32,7 @@ form.addEventListener("submit", async (e) => {
   const language = langSelect.value;
 
   try {
-    const res = await fetch("http://localhost:3000/ask", {
+    const res = await fetch(`${BASE_URL}/ask`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query: userInput, language, browser }),
@@ -37,7 +43,7 @@ form.addEventListener("submit", async (e) => {
     const isTruncated = responseText.endsWith("... (truncated)");
 
     if (isTruncated) {
-      const fullRes = await fetch("http://localhost:3000/ask", {
+      const fullRes = await fetch(`${BASE_URL}/ask`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: userInput, language, browser }),
@@ -106,7 +112,7 @@ function appendMessage(sender, text, className, isTruncated = false, fullText = 
       try {
         const browser = getBrowserName();
         const language = langSelect.value;
-        const res = await fetch("http://localhost:3000/ask", {
+        const res = await fetch(`${BASE_URL}/ask`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ query: originalQuery, language, browser }),
@@ -203,7 +209,7 @@ agentForm.addEventListener("submit", async (e) => {
   agentResult.innerText = "⏳ Running EVA Agent...";
 
   try {
-    const res = await fetch("/trigger-agent", {
+    const res = await fetch(`${BASE_URL}/trigger-agent`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ vendor, product, amount }),
@@ -261,7 +267,7 @@ checkInventoryBtn.addEventListener("click", async () => {
   inventoryResult.innerText = "⏳ Checking inventory...";
 
   try {
-    const res = await fetch("/trigger-agent", {
+    const res = await fetch(`${BASE_URL}/trigger-agent`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action: "get_inventory_status", product }),
